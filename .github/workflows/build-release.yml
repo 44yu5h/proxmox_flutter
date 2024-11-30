@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: init
-        run: |
-          flutter clean
-          flutter pub get
-
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -56,6 +51,11 @@ jobs:
 
       - name: Turn off analytics
         run: flutter --disable-analytics
+
+      - name: init
+        run: |
+          flutter clean
+          flutter pub get
 
       - name: Build Dependencies
         run: |
