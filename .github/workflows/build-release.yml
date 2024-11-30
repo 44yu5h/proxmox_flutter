@@ -52,14 +52,10 @@ jobs:
       - name: Turn off analytics
         run: flutter --disable-analytics
 
-      - name: init
-        run: |
-          flutter clean
-          flutter pub get
-
       - name: Build Dependencies
         run: |
           cd pve_flutter_frontend
+          flutter run pub upgrade win32
           flutter pub get
           dart pub run build_runner build --delete-conflicting-outputs
           cd ../proxmox_dart_api_client
@@ -89,6 +85,7 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
+          keytool -list -keystore keystore.jks
 
       - name: Build APK
         working-directory: ./pve_flutter_frontend
