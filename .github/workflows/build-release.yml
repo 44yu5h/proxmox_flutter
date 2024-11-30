@@ -84,6 +84,7 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=keystore.jks" >> android/key.properties
+          keytool -list -keystore keystore.jks
 
       - name: Build APK
         working-directory: ./pve_flutter_frontend
